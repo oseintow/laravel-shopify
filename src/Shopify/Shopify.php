@@ -96,7 +96,8 @@ class Shopify{
         $query = in_array($method, ['get','delete']) ? "query" : "json";
         $response = $client->request(strtoupper($method), $uri, [
                 $query => $params,
-                'headers' => array_merge($headers, $this->headers)
+                'headers' => array_merge($headers, $this->headers),
+                'stream' => false
             ]);
 
         return $response;
