@@ -11,6 +11,6 @@ return [
     |
     */
 
-    'key' => '',
-    'secret' => '',
+    'key' => env("SHOPIFY_API_KEY", null),
+    'secret' => env("SHOPIFY_CLIENT_SECRET", null)
 ];

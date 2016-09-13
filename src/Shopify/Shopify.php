@@ -23,13 +23,17 @@ class Shopify{
      */
     public function setShopDomin($shopDomain)
     {
-        $this->shopDomain = $shopDomain;
+        $url = parse_url($shopDomain);
+        $this->shopDomain = isset($url['host']) ? $url['host'] : $this->removeProtocol($shopDomain);
+
         return $this;
     }
 
     public function setAccessToken($accessToken)
     {
         $this->accessToken = $accessToken;
+
+        return $this;
     }
 
     private function baseUrl()
@@ -37,33 +41,78 @@ class Shopify{
         return "https://{$this->shopDomain}/";
     }
 
+    // Get the URL required to request authorization
+    public function getAuthorizeUrl($scope = [] || '', $redirect_url='')
+    {
+        if(is_array($scope)) $scope = implode(",", $scope);
+        $url = "https://{$this->shopDomain}/admin/oauth/authorize?client_id={$this->key}&scope=" . urlencode($scope);
+        if ($redirect_url != '') $url .= "&redirect_uri=" . urlencode($redirect_url);
+
+        return $url;
+    }
+
+    public function getAccessToken($code)
+    {
+        $uri = "admin/oauth/access_token";
+        $payload = ["client_id" => $this->key, 'client_secret' => $this->secret, 'code' => $code];
+        $response = $this->makeRequest('POST', $uri, $payload);
+
+        if (isset($response['access_token']))
+            return $response['access_token'];
+        return '';
+    }
+
     private function setXShopifyAccessToken()
     {
-        $this->addHeader(['X-Shopify-Access-Token' => $this->accessToken]);
+        return ['X-Shopify-Access-Token' => $this->accessToken];
     }
 
     public function addHeader($key, $value)
     {
-        array_push($this->headers, [$key => $value]);
+        array_merge($this->headers, [$key => $value]);
+
+        return $this;
     }
 
-    public function __call($method, $resource, $params = [])
+    public function removeHeaders(){
+        $this->headers = [];
+
+        return $this;
+    }
+
+    public function __call($method, $uri, $params = [])
     {
-        $resource = ltrim($resource,"/");
-        in_array($method, ['post','put']) ? $this->addHeader("Content-Type", "application/json; charset=utf-8") : '';
-        $response = $this->makeRequest(strtoupper($method), $resource, $params);
+        $uri = ltrim($uri,"/");
+        $headers  = in_array($method, ['post','put']) ? ["Content-Type" => "application/json; charset=utf-8"] : [];
+        $headers  = array_merge($headers, $this->setXShopifyAccessToken());
+        $response = $this->makeRequest($method, $uri, $params, $headers);
 
         return $response;
     }
 
-    private function makeRequest($method, $resource, $params)
+    private function makeRequest($method, $uri, $params = [], $headers = [])
     {
-        $this->setXShopifyAccessToken();
         $client = new Client(['base_uri' => $this->baseUrl()]);
-        $payload = in_array($method, ['get','delete']) ? 'query' : 'json';
-        $response = $client->request($method, $resource, [ $payload => $params, 'headers' => $this->headers]);
+        $query = in_array($method, ['get','delete']) ? "query" : "json";
+        $response = $client->request(strtoupper($method), $uri, [
+                $query => $params,
+                'headers' => array_merge($headers, $this->headers)
+            ]);
+
+        \Log::info($response);
 
         return $response;
+    }
+
+    public function removeProtocol($url){
+        $disallowed = array('http://', 'https://','http//','ftp://','ftps://');
+        foreach($disallowed as $d) {
+            if(strpos($url, $d) === 0) {
+                return str_replace($d, '', $url);
+            }
+        }
+
+        return $url;
     }
 
 }
