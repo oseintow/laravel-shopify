@@ -52,6 +52,8 @@ class Shopify{
         $resource = ltrim($resource,"/");
         in_array($method, ['post','put']) ? $this->addHeader("Content-Type", "application/json; charset=utf-8") : '';
         $response = $this->makeRequest(strtoupper($method), $resource, $params);
+
+        return $response;
     }
 
     private function makeRequest($method, $resource, $params)
