@@ -82,7 +82,7 @@ class Shopify{
 
     public function __call($method, $args)
     {
-        list($uri, $params) = [ltrim($args[0],"/"), $args[1] ?? []];
+        list($uri, $params) = [$args[0], $args[1] ?? []];
         $headers  = in_array($method, ['post','put']) ? ["Content-Type" => "application/json; charset=utf-8"] : [];
         $headers  = array_merge($headers, $this->setXShopifyAccessToken());
         $response = $this->makeRequest($method, $uri, $params, $headers);
@@ -96,11 +96,15 @@ class Shopify{
         $query = in_array($method, ['get','delete']) ? "query" : "json";
         $response = $client->request(strtoupper($method), $uri, [
                 $query => $params,
-                'headers' => array_merge($headers, $this->headers),
-                'stream' => false
+                'headers' => array_merge($headers, $this->headers)
             ]);
 
-        return $response;
+        \Log::info($method);
+        \Log::info($params);
+        \Log::info(array_merge($headers, $this->headers));
+
+
+        return $response->json();
     }
 
     public function removeProtocol($url){
