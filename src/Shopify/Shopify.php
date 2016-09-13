@@ -99,8 +99,6 @@ class Shopify{
                 'headers' => array_merge($headers, $this->headers)
             ]);
 
-        \Log::info($response);
-
         return $response;
     }
 
