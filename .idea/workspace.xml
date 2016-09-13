@@ -44,18 +44,18 @@
       <file leaf-file-name="shopify.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/config/shopify.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
+            <state relative-caret-position="260">
+              <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ShopifyServiceProvider.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ShopifyServiceProvider.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Shopify/ShopifyServiceProvider.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+            <state relative-caret-position="390">
+              <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
               <folding>
                 <element signature="e#36#47#0#PHP" expanded="true" />
               </folding>
@@ -73,7 +73,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Shopify.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Shopify.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Shopify/Shopify.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="271">
@@ -110,10 +110,10 @@
       <list>
         <option value="$PROJECT_DIR$/src/config/shopify.php" />
         <option value="$PROJECT_DIR$/src/Shopify/Facades/Shopify.php" />
-        <option value="$PROJECT_DIR$/src/Shopify/ShopifyServiceProvider.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/src/Shopify/Shopify.php" />
+        <option value="$PROJECT_DIR$/src/Shopify/ShopifyServiceProvider.php" />
       </list>
     </option>
   </component>
@@ -268,12 +268,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1473779030205</updated>
-      <workItem from="1473779031530" duration="12275000" />
+      <workItem from="1473779031530" duration="13223000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12275000" />
+    <option name="totallyTimeSpent" value="13223000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="979" extended-state="6" />
@@ -306,29 +306,11 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/config/shopify.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Shopify/Facades/Shopify.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
           <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Shopify/ShopifyServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-          <folding>
-            <element signature="e#36#47#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -369,6 +351,24 @@
         <state relative-caret-position="271">
           <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config/shopify.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Shopify/ShopifyServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+          <folding>
+            <element signature="e#36#47#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
