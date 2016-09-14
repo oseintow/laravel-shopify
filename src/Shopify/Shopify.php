@@ -38,7 +38,6 @@ class Shopify{
 
     private function baseUrl()
     {
-        \Log::info("https://{$this->shopDomain}/");
         return "https://{$this->shopDomain}/";
     }
 
@@ -100,14 +99,8 @@ class Shopify{
                 $query => $params
             ]);
 
-        \Log::info($method);
-        \Log::info($params);
-        \Log::info(array_merge($headers, $this->headers));
-
-
-        $stream = $response->getBody();
-        \Log::info($stream);
-        return $stream->getContents();
+        $response = json_decode($response->getBody(), true);
+        return $response;
     }
 
     public function removeProtocol($url){
