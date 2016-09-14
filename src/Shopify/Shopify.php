@@ -114,7 +114,7 @@ class Shopify{
 
         $this->parseHeaders($response);
 
-        \Log::info($this->getHeaders());
+        \Log::info((array)$this->getHeaders());
         \Log::info($response->getStatusCode());
         \Log::info((array)$response);
 
