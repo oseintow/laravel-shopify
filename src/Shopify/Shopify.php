@@ -95,8 +95,8 @@ class Shopify{
         $client = new Client(['base_uri' => $this->baseUrl(), 'timeout'  => 60.0,]);
         $query = in_array($method, ['get','delete']) ? "query" : "json";
         $response = $client->request(strtoupper($method), $uri, [
-                $query => $params,
-                'headers' => array_merge($headers, $this->headers)
+                'headers' => array_merge($headers, $this->headers),
+                $query => $params
             ]);
 
         \Log::info($method);
@@ -105,6 +105,7 @@ class Shopify{
 
 
         $stream = $response->getBody();
+        \Log::info($stream);
         return $stream->getContents();
     }
 
