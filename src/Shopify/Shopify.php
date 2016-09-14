@@ -111,7 +111,10 @@ class Shopify{
         $responseBody = $this->responseBody($response);
 
         if(isset($responseBody['errors']) || $response->getStatusCode() >= 400){
-            throw new ShopifyApiException($responseBody['errors'], $response->getStatusCode());
+            throw new ShopifyApiException(
+                $responseBody['errors'] ?? $response->getReasonPhrase(),
+                $response->getStatusCode()
+            );
         }
 
         return $responseBody;
