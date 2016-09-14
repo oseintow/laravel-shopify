@@ -107,15 +107,17 @@ class Shopify{
                 'timeout'  => 60.0
             ]);
 
-        \Log::info($response->getStatusCode());
-        \Log::info((array)$response);
-
 //        if (isset($response['errors']) or ($this->last_response_headers['http_status_code'] >= 400)){
 //            //if (isset($response['errors'])) Log::error($response['errors']);
 //            throw new ShopifyApiException($method, $path, $params, $this->last_response_headers, $response);
 //        }
 
         $this->parseHeaders($response);
+
+        \Log::info($this->getHeaders());
+        \Log::info($response->getStatusCode());
+        \Log::info((array)$response);
+
 
         return $response;
     }
