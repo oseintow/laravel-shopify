@@ -12,6 +12,7 @@ class Shopify{
     private $accessToken;
     private $requestHeaders = [];
     private $responseHeaders = [];
+    private $client;
 
     public function __construct($key = '', $secret = '')
     {
@@ -22,10 +23,10 @@ class Shopify{
     /*
      * Set Shop Domain Url;
      */
-    public function setShopDomain($shopDomain)
+    public function setShopUrl($shopUrl)
     {
-        $url = parse_url($shopDomain);
-        $this->shopDomain = isset($url['host']) ? $url['host'] : $this->removeProtocol($shopDomain);
+        $url = parse_url($shopUrl);
+        $this->shopDomain = isset($url['host']) ? $url['host'] : $this->removeProtocol($shopUrl);
 
         return $this;
     }
@@ -101,9 +102,9 @@ class Shopify{
 
     private function makeRequest($method, $uri, $params = [], $headers = [])
     {
-        $client = new Client(['base_uri' => $this->baseUrl(), 'timeout'  => 60.0]);
+        $this->client = new Client(['base_uri' => $this->baseUrl(), 'timeout'  => 60.0]);
         $query = in_array($method, ['get','delete']) ? "query" : "json";
-        $response = $client->request(strtoupper($method), $uri, [
+        $response = $this->client->request(strtoupper($method), $uri, [
                 'headers' => array_merge($headers, $this->requestHeaders),
                 $query => $params
             ]);
