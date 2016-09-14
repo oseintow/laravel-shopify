@@ -14,10 +14,11 @@ class Shopify{
     private $responseHeaders = [];
     private $client;
 
-    public function __construct($key = '', $secret = '')
+    public function __construct(Client $client, $key = '', $secret = '')
     {
         $this->key = $key;
         $this->secret= $secret;
+        $this->client = $client;
     }
 
     /*
@@ -97,7 +98,6 @@ class Shopify{
 
     private function makeRequest($method, $uri, $params = [], $headers = [])
     {
-        $this->client = new Client();
         $query = in_array($method, ['get','delete']) ? "query" : "json";
         $response = $this->client->request(strtoupper($method), $this->baseUrl().$uri, [
                 'headers' => array_merge($headers, $this->requestHeaders),

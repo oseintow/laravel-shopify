@@ -3,6 +3,7 @@
 namespace Oseintow\Shopify;
 
 use Config;
+use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
 
 class ShopifyServiceProvider extends ServiceProvider {
@@ -36,7 +37,7 @@ class ShopifyServiceProvider extends ServiceProvider {
     {
         $this->app['shopify'] = $this->app->share(function($app)
         {
-            return new Shopify(Config::get('shopify.key'),Config::get('shopify.secret'));
+            return new Shopify(new Client, Config::get('shopify.key'),Config::get('shopify.secret'));
         });
     }
 
