@@ -32,13 +32,6 @@ class Shopify{
         return $this;
     }
 
-    public function setAccessToken($accessToken)
-    {
-        $this->accessToken = $accessToken;
-
-        return $this;
-    }
-
     private function baseUrl()
     {
         return "https://{$this->shopDomain}/";
@@ -63,6 +56,13 @@ class Shopify{
         if (isset($response['access_token']))
             return $response['access_token'];
         return '';
+    }
+
+    public function setAccessToken($accessToken)
+    {
+        $this->accessToken = $accessToken;
+
+        return $this;
     }
 
     private function setXShopifyAccessToken()
@@ -92,6 +92,8 @@ class Shopify{
         $headers  = in_array($method, ['post','put']) ? ["Content-Type" => "application/json; charset=utf-8"] : [];
         $headers  = array_merge($headers, $this->setXShopifyAccessToken());
         $response = $this->makeRequest($method, $uri, $params, $headers);
+
+        \Log::info($this->getHeaders());
 
         return $this->responseBody($response);
     }
