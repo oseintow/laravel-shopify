@@ -82,7 +82,7 @@ class Shopify{
 
     public function __call($method, $args)
     {
-        list($uri, $params) = [$args[0], $args[1] ?? []];
+        list($uri, $params) = [ltrim($args[0],"/"), $args[1] ?? []];
         $headers  = in_array($method, ['post','put']) ? ["Content-Type" => "application/json; charset=utf-8"] : [];
         $headers  = array_merge($headers, $this->setXShopifyAccessToken());
         $response = $this->makeRequest($method, $uri, $params, $headers);
@@ -92,9 +92,9 @@ class Shopify{
 
     private function makeRequest($method, $uri, $params = [], $headers = [])
     {
-        $client = new Client();
+        $client = new Client(['base_uri' => $this->baseUrl(), 'timeout'  => 60.0,]);
         $query = in_array($method, ['get','delete']) ? "query" : "json";
-        $response = $client->request(strtoupper($method), $this->baseUrl().$uri, [
+        $response = $client->request(strtoupper($method), $uri, [
                 $query => $params,
                 'headers' => array_merge($headers, $this->headers)
             ]);
@@ -104,12 +104,12 @@ class Shopify{
         \Log::info(array_merge($headers, $this->headers));
 
 
-        $stream = $response->getBody();
+        $stream = json_decode($response->getBody());
         return $stream->getContents();
     }
 
     public function removeProtocol($url){
-        $disallowed = array('http://', 'https://','http//','ftp://','ftps://');
+        $disallowed = ['http://', 'https://','http//','ftp://','ftps://'];
         foreach($disallowed as $d) {
             if(strpos($url, $d) === 0) {
                 return str_replace($d, '', $url);
