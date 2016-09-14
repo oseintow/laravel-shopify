@@ -3,6 +3,7 @@
 namespace Oseintow\Shopify;
 
 use GuzzleHttp\Client;
+use Oseintow\Shopify\Exceptions\ShopifyApiException;
 
 class Shopify{
 
@@ -93,9 +94,7 @@ class Shopify{
         $headers  = array_merge($headers, $this->setXShopifyAccessToken());
         $response = $this->makeRequest($method, $uri, $params, $headers);
 
-        \Log::info($this->getHeaders());
-
-        return $this->responseBody($response);
+        return $response;
     }
 
     private function makeRequest($method, $uri, $params = [], $headers = [])
@@ -104,22 +103,18 @@ class Shopify{
         $response = $this->client->request(strtoupper($method), $this->baseUrl().$uri, [
                 'headers' => array_merge($headers, $this->requestHeaders),
                 $query => $params,
-                'timeout'  => 60.0
+                'timeout'  => 60.0,
+                'http_errors' => false
             ]);
 
-//        if (isset($response['errors']) or ($this->last_response_headers['http_status_code'] >= 400)){
-//            //if (isset($response['errors'])) Log::error($response['errors']);
-//            throw new ShopifyApiException($method, $path, $params, $this->last_response_headers, $response);
-//        }
-
         $this->parseHeaders($response);
+        $responseBody = $this->responseBody($response);
 
-        \Log::info((array)$this->getHeaders());
-        \Log::info($response->getStatusCode());
-        \Log::info((array)$response);
+        if(isset($responseBody['errors']) || $response->getStatusCode() >= 400){
+            throw new ShopifyApiException($responseBody['errors'], $response->getStatusCode());
+        }
 
-
-        return $response;
+        return $responseBody;
     }
 
     private function parseHeaders($response)
