@@ -92,6 +92,10 @@ class Shopify{
         $response = $this->makeRequest($method, $uri, $params, $headers);
         $response = $this->responseBody($response);
 
+        \Log::info($this->getHeader('Content-Type'));
+        \Log::info($this->hasHeader('Content-Type'));
+        \Log::info($this->getHeaders());
+
         return $response;
     }
 
@@ -112,18 +116,28 @@ class Shopify{
     private function parseHeaders($response)
     {
         foreach ($response->getHeaders() as $name => $values) {
-            \Log::info($name . ': ' . implode(', ', $values) . "\r\n");
+            array_merge($this->responseHeaders, [$name => implode(', ', $values)]);
         }
+    }
+
+    public function getHeaders()
+    {
+        return $this->responseHeaders;
+    }
+
+    public function getHeader($header)
+    {
+        return $this->responseHeaders[$header];
+    }
+
+    public function hasHeader($header)
+    {
+        return array_key_exists($header, $this->responseHeaders);
     }
 
     private function responseBody($response)
     {
         return json_decode($response->getBody(), true);
-    }
-
-    private function responseHeaders($response)
-    {
-
     }
 
     public function removeProtocol($url)
