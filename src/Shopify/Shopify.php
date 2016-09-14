@@ -104,7 +104,7 @@ class Shopify{
         \Log::info(array_merge($headers, $this->headers));
 
 
-        $stream = json_decode($response->getBody());
+        $stream = $response->getBody();
         return $stream->getContents();
     }
 
