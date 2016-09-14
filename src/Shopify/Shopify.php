@@ -92,8 +92,8 @@ class Shopify{
         $response = $this->makeRequest($method, $uri, $params, $headers);
         $response = $this->responseBody($response);
 
-//        \Log::info($this->getHeader('Content-Type'));
-//        \Log::info($this->hasHeader('Content-Type'));
+        \Log::info($this->getHeader('Content-Type'));
+        \Log::info($this->hasHeader('Content-Type'));
         \Log::info((array)$this->getHeaders());
 
         return $response;
@@ -127,7 +127,9 @@ class Shopify{
 
     public function getHeader($header)
     {
-        return $this->responseHeaders[$header];
+        if($this->hasHeader($header));
+            return $this->responseHeaders[$header];
+        return '';
     }
 
     public function hasHeader($header)
