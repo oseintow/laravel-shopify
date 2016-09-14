@@ -90,7 +90,7 @@ class Shopify{
     public function __call($method, $args)
     {
         list($uri, $params) = [ltrim($args[0],"/"), $args[1] ?? []];
-        $headers  = in_array($method, ['post','put']) ? ["Content-Type" => "application/json; charset=utf-8"] : [];
+//        $headers  = in_array($method, ['post','put']) ? ["Content-Type" => "application/json; charset=utf-8"] : [];
         $headers  = array_merge($headers, $this->setXShopifyAccessToken());
         $response = $this->makeRequest($method, $uri, $params, $headers);
 
