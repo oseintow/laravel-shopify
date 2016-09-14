@@ -104,7 +104,7 @@ class Shopify{
         \Log::info(array_merge($headers, $this->headers));
 
 
-        return $response->json();
+        return $response->getBody();
     }
 
     public function removeProtocol($url){
