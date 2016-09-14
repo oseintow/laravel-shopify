@@ -80,30 +80,53 @@ class Shopify{
         return $this;
     }
 
+    /*
+     *  $args[0] is for route uri and $args[1] is either request body or query strings
+     */
     public function __call($method, $args)
     {
         list($uri, $params) = [ltrim($args[0],"/"), $args[1] ?? []];
         $headers  = in_array($method, ['post','put']) ? ["Content-Type" => "application/json; charset=utf-8"] : [];
         $headers  = array_merge($headers, $this->setXShopifyAccessToken());
         $response = $this->makeRequest($method, $uri, $params, $headers);
+        $response = $this->responseBody($response);
 
         return $response;
     }
 
     private function makeRequest($method, $uri, $params = [], $headers = [])
     {
-        $client = new Client(['base_uri' => $this->baseUrl(), 'timeout'  => 60.0,]);
+        $client = new Client(['base_uri' => $this->baseUrl(), 'timeout'  => 60.0]);
         $query = in_array($method, ['get','delete']) ? "query" : "json";
         $response = $client->request(strtoupper($method), $uri, [
                 'headers' => array_merge($headers, $this->headers),
                 $query => $params
             ]);
 
-        $response = json_decode($response->getBody(), true);
+        $this->parseHeaders($response);
+
         return $response;
     }
 
-    public function removeProtocol($url){
+    private function parseHeaders($response)
+    {
+        foreach ($response->getHeaders() as $name => $values) {
+            \Log::info($name . ': ' . implode(', ', $values) . "\r\n");
+        }
+    }
+
+    private function responseBody($response)
+    {
+        return json_decode($response->getBody(), true);
+    }
+
+    private function responseHeaders($response)
+    {
+
+    }
+
+    public function removeProtocol($url)
+    {
         $disallowed = ['http://', 'https://','http//','ftp://','ftps://'];
         foreach($disallowed as $d) {
             if(strpos($url, $d) === 0) {
