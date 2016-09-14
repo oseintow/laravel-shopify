@@ -92,9 +92,9 @@ class Shopify{
         $response = $this->makeRequest($method, $uri, $params, $headers);
         $response = $this->responseBody($response);
 
-        \Log::info($this->getHeader('Content-Type'));
-        \Log::info($this->hasHeader('Content-Type'));
-        \Log::info($this->getHeaders());
+//        \Log::info($this->getHeader('Content-Type'));
+//        \Log::info($this->hasHeader('Content-Type'));
+        \Log::info((array)$this->getHeaders());
 
         return $response;
     }
