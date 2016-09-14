@@ -21,7 +21,7 @@ class Shopify{
     }
 
     /*
-     * Set Shop Domain Url;
+     * Set Shop  Url;
      */
     public function setShopUrl($shopUrl)
     {
@@ -71,7 +71,7 @@ class Shopify{
 
     public function addHeader($key, $value)
     {
-        array_merge($this->requestHeaders, [$key => $value]);
+        $this->requestHeaders = array_merge($this->requestHeaders, [$key => $value]);
 
         return $this;
     }
@@ -91,22 +91,18 @@ class Shopify{
         $headers  = in_array($method, ['post','put']) ? ["Content-Type" => "application/json; charset=utf-8"] : [];
         $headers  = array_merge($headers, $this->setXShopifyAccessToken());
         $response = $this->makeRequest($method, $uri, $params, $headers);
-        $response = $this->responseBody($response);
 
-        \Log::info($this->getHeader('Content-Type'));
-        \Log::info($this->hasHeader('Content-Type'));
-        \Log::info((array)$this->getHeaders());
-
-        return $response;
+        return $this->responseBody($response);
     }
 
     private function makeRequest($method, $uri, $params = [], $headers = [])
     {
-        $this->client = new Client(['base_uri' => $this->baseUrl(), 'timeout'  => 60.0]);
+        $this->client = new Client();
         $query = in_array($method, ['get','delete']) ? "query" : "json";
-        $response = $this->client->request(strtoupper($method), $uri, [
+        $response = $this->client->request(strtoupper($method), $this->baseUrl().$uri, [
                 'headers' => array_merge($headers, $this->requestHeaders),
-                $query => $params
+                $query => $params,
+                'timeout'  => 60.0
             ]);
 
         $this->parseHeaders($response);
@@ -128,7 +124,7 @@ class Shopify{
 
     public function getHeader($header)
     {
-        if($this->hasHeader($header));
+        if($this->hasHeader($header))
             return $this->responseHeaders[$header];
         return '';
     }
