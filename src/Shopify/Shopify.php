@@ -38,6 +38,7 @@ class Shopify{
 
     private function baseUrl()
     {
+        \Log::info("https://{$this->shopDomain}/");
         return "https://{$this->shopDomain}/";
     }
 
