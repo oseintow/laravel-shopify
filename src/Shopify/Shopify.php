@@ -10,7 +10,8 @@ class Shopify{
     private $secret;
     private $shopDomain;
     private $accessToken;
-    private $headers = [];
+    private $requestHeaders = [];
+    private $responseHeaders = [];
 
     public function __construct($key = '', $secret = '')
     {
@@ -69,13 +70,13 @@ class Shopify{
 
     public function addHeader($key, $value)
     {
-        array_merge($this->headers, [$key => $value]);
+        array_merge($this->requestHeaders, [$key => $value]);
 
         return $this;
     }
 
     public function removeHeaders(){
-        $this->headers = [];
+        $this->requestHeaders = [];
 
         return $this;
     }
@@ -99,7 +100,7 @@ class Shopify{
         $client = new Client(['base_uri' => $this->baseUrl(), 'timeout'  => 60.0]);
         $query = in_array($method, ['get','delete']) ? "query" : "json";
         $response = $client->request(strtoupper($method), $uri, [
-                'headers' => array_merge($headers, $this->headers),
+                'headers' => array_merge($headers, $this->requestHeaders),
                 $query => $params
             ]);
 
