@@ -116,8 +116,8 @@ class Shopify{
     private function parseHeaders($response)
     {
         foreach ($response->getHeaders() as $name => $values) {
-//            array_merge($this->responseHeaders, [$name => implode(', ', $values)]);
-            array_push($this->responseHeaders, [$name => implode(', ', $values)]);
+            array_merge($this->responseHeaders, [$name => implode(', ', $values)]);
+//            array_push($this->responseHeaders, [$name => implode(', ', $values)]);
         }
     }
 
