@@ -92,9 +92,9 @@ class Shopify{
 
     private function makeRequest($method, $uri, $params = [], $headers = [])
     {
-        $client = new Client(['base_uri' => $this->baseUrl()]);
+        $client = new Client();
         $query = in_array($method, ['get','delete']) ? "query" : "json";
-        $response = $client->request(strtoupper($method), $uri, [
+        $response = $client->request(strtoupper($method), $this->baseUrl().$uri, [
                 $query => $params,
                 'headers' => array_merge($headers, $this->headers)
             ]);
