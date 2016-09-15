@@ -98,6 +98,7 @@ $products = Shopify::setShopUrl($shopUrl)->setAccessToken($accessToken)->get("ad
 To pass query params
 
 ```php5
+// returns Collection
 $shopify = Shopify::setShopUrl($shopUrl)->setAccessToken($accessToken);
 $products = $shopify->get("admin/products.json", ["limit"=>20, "page" => 1]);
 ```
@@ -119,11 +120,18 @@ class Foo
         $this->shopify = $shopify;
     }
 
+    /*
+    * returns Collection
+    */
     public function getProducts(Request $request)
     {
         $products = $this->shopify->setShopUrl($shopUrl)
             ->setAccessToken($accessToken)
             ->get('admin/products.json');
+
+        $products->each(function($value){
+             \Log::info($value->title);
+        });
     }
 }
 ```
