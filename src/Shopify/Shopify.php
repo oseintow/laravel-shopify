@@ -104,7 +104,7 @@ class Shopify{
         $response = $this->client->request(strtoupper($method), $this->baseUrl().$uri, [
                 'headers' => array_merge($headers, $this->requestHeaders),
                 $query => $params,
-                'timeout'  => 60.0,
+                'timeout' => 60.0,
                 'http_errors' => false
             ]);
 
