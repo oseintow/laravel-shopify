@@ -128,6 +128,25 @@ class Foo
 }
 ```
 
+##Miscellaneous
+
+To get Response headers
+
+```php5
+Shopify::getHeaders();
+```
+
+To get specific header
+```php5
+Shopify::getHeader("Content-Type");
+```
+
+To get response status code or status message
+```php5
+Shopify::getStatusCode(); // 200
+Shopify::getReasonPhrase(); // ok
+```
+
 
 
 
