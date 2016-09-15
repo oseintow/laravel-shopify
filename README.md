@@ -32,7 +32,7 @@ Laravel Shopify requires connection configuration. You will need to publish vend
 
     php artisan vendor:publish
 
-This will create a shopify.php file in the config directory. You will need to set your *API_KKEY* and *SECRET*
+This will create a shopify.php file in the config directory. You will need to set your **API_KEY** and **SECRET**
 
 #Usage
 
