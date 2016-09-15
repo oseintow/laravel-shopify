@@ -10,25 +10,25 @@ Add package to composer.json
 
 Add the service provider to config/app.php in the providers array.
 
-    ```php5
-    <?php
+```php5
+<?php
 
-    'providers' => [
-        ...
-        Oseintow\Shopify\ShopifyServiceProvider::class,
-    ],
-    ```
+'providers' => [
+    ...
+    Oseintow\Shopify\ShopifyServiceProvider::class,
+],
+```
 
 Setup alias for the Facade
 
-    ```php5
-    <?php
+```php5
+<?php
 
-        'aliases' => [
-            ...
-            'Shopify' => Oseintow\Shopify\Facades\Shopify::class,
-        ],
-    ```
+    'aliases' => [
+        ...
+        'Shopify' => Oseintow\Shopify\Facades\Shopify::class,
+    ],
+```
 
 ##Configuration
 
@@ -49,28 +49,28 @@ They are:
 
 This process will enable us to obtain the shops access token
 
-    ```php5
-    use Oseintow\Shopify\Facades\Shopify
+```php5
+use Oseintow\Shopify\Facades\Shopify
 
-    Route::get("install_shop",function(){
-        $shopUrl = "example.myshopify.com";
-        $scope = ["write_products","read_orders"];
-        $redirectUrl = "mydomain.com/process_shopify_data";
+Route::get("install_shop",function(){
+    $shopUrl = "example.myshopify.com";
+    $scope = ["write_products","read_orders"];
+    $redirectUrl = "mydomain.com/process_shopify_data";
 
-        $shopify = Shopify::setShopUrl($shopUrl);
-        return redirect()->to($shopify->getAuthorizeUrl($scope,$redirectUrl));
-    });
-    ```
+    $shopify = Shopify::setShopUrl($shopUrl);
+    return redirect()->to($shopify->getAuthorizeUrl($scope,$redirectUrl));
+});
+```
 
 Let retrieve access token
 
 ```php5
-    Route::get("process_oauth_result",function(\Illuminate\Http\Request $request){
-        $shopUrl = "example.myshopify.com";
-        $accesToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code));
+Route::get("process_oauth_result",function(\Illuminate\Http\Request $request){
+    $shopUrl = "example.myshopify.com";
+    $accesToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code));
 
-        dd($accessToken);
-    });
+    dd($accessToken);
+});
 ```
 
 
