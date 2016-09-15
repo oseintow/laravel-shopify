@@ -64,14 +64,14 @@ This process will enable us to obtain the shops access token
 
 Let retrieve access token
 
-    ```php5
+```php5
     Route::get("process_oauth_result",function(\Illuminate\Http\Request $request){
         $shopUrl = "example.myshopify.com";
         $accesToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code));
 
         dd($accessToken);
     });
-    ```
+```
 
 
 
