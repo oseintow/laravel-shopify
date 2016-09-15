@@ -1,8 +1,8 @@
-## Laravel Shopify
+# Laravel Shopify
 
 Laravel Shopify is a simple package which helps to build robust integration into shopify.
 
-#Installation
+##Installation
 
 Add package to composer.json
 
@@ -26,7 +26,7 @@ Setup alias for the Facade
             'Shopify' => Oseintow\Shopify\Facades\Shopify::class,
         ],
 
-#Configuration
+##Configuration
 
 Laravel Shopify requires connection configuration. You will need to publish vendor assets
 
@@ -34,7 +34,38 @@ Laravel Shopify requires connection configuration. You will need to publish vend
 
 This will create a shopify.php file in the config directory. You will need to set your **API_KEY** and **SECRET**
 
-#Usage
+##Usage
+
+To install/integrate a shop you will need to initiate an oauth authentication with the shopify API and this require three components.
+
+They are:
+    1. Shop url (eg. example.myshopify.com)
+    2. scope (eg. write_products, read_orders, etc)
+    2. redirect url (eg. mydomain.com/process_oauth_result)
+
+This process will enable us to obtain the shops access token
+
+    use Oseintow\Shopify\Facades\Shopify
+
+    Route::get("install_shop",function(){
+        $shopUrl = "example.myshopify.com";
+        $scope = ["write_products","read_orders"];
+        $redirectUrl = "mydomain.com/process_shopify_data";
+
+        $shopify = Shopify::setShopUrl($shopUrl);
+        return redirect()->to($shopify->getAuthorizeUrl($scope,$redirectUrl));
+    });
+
+Let retrieve access token
+
+    Route::get("process_oauth_result",function(\Illuminate\Http\Request $request){
+        $shopUrl = "example.myshopify.com";
+        $accesToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code));
+
+        dd($accessToken);
+    });
+
+
 
 
 
