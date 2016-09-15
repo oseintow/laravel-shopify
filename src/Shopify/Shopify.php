@@ -95,7 +95,7 @@ class Shopify{
         list($uri, $params) = [ltrim($args[0],"/"), $args[1] ?? []];
         $response = $this->makeRequest($method, $uri, $params, $this->setXShopifyAccessToken());
 
-        return collect($response);
+        return $response;
     }
 
     private function makeRequest($method, $uri, $params = [], $headers = [])
@@ -119,7 +119,8 @@ class Shopify{
             );
         }
 
-        return $responseBody;
+        return (is_array($responseBody) && (count($responseBody) > 0)) ?
+            collect(array_shift($responseBody)) : $responseBody;
     }
 
     private function parseResponseStatus($response)
