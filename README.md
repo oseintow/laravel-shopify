@@ -45,6 +45,7 @@ They are:
 
 This process will enable us to obtain the shops access token
 
+    ```php
     use Oseintow\Shopify\Facades\Shopify
 
     Route::get("install_shop",function(){
@@ -55,15 +56,18 @@ This process will enable us to obtain the shops access token
         $shopify = Shopify::setShopUrl($shopUrl);
         return redirect()->to($shopify->getAuthorizeUrl($scope,$redirectUrl));
     });
+    ```
 
 Let retrieve access token
 
+    ```php
     Route::get("process_oauth_result",function(\Illuminate\Http\Request $request){
         $shopUrl = "example.myshopify.com";
         $accesToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code));
 
         dd($accessToken);
     });
+    ```
 
 
 
