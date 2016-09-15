@@ -87,7 +87,7 @@ Shopify::delete("resource uri");
 
 Let use our access token to get products from shopify.
 
-**NB:** You can use this to access any resource on shopify (be it products, orders, etc)
+**NB:** You can use this to access any resource on shopify (be it Product, Shop, Order, etc)
 
 ```php5
 $shopUrl = "example.myshopify.com";
