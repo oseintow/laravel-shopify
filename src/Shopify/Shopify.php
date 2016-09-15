@@ -57,9 +57,7 @@ class Shopify{
         $payload = ["client_id" => $this->key, 'client_secret' => $this->secret, 'code' => $code];
         $response = $this->makeRequest('POST', $uri, $payload);
 
-        if (isset($response['access_token']))
-            return $response['access_token'];
-        return '';
+        return $response ?? '';
     }
 
     public function setAccessToken($accessToken)
