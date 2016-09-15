@@ -10,21 +10,25 @@ Add package to composer.json
 
 Add the service provider to config/app.php in the providers array.
 
+    ```php
     <?php
 
     'providers' => [
         ...
         Oseintow\Shopify\ShopifyServiceProvider::class,
     ],
+    ```
 
 Setup alias for the Facade
 
+    ```php
     <?php
 
         'aliases' => [
             ...
             'Shopify' => Oseintow\Shopify\Facades\Shopify::class,
         ],
+    ```
 
 ##Configuration
 
