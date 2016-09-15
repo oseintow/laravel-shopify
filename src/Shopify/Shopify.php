@@ -5,15 +5,18 @@ namespace Oseintow\Shopify;
 use GuzzleHttp\Client;
 use Oseintow\Shopify\Exceptions\ShopifyApiException;
 
+
 class Shopify{
 
-    private $key;
-    private $secret;
-    private $shopDomain;
-    private $accessToken;
-    private $requestHeaders = [];
-    private $responseHeaders = [];
-    private $client;
+    protected $key;
+    protected $secret;
+    protected $shopDomain;
+    protected $accessToken;
+    protected $requestHeaders = [];
+    protected $responseHeaders = [];
+    protected $client;
+    protected $responseStatusCode;
+    protected $reasonPhrase;
 
     public function __construct(Client $client, $key = '', $secret = '')
     {
@@ -106,6 +109,7 @@ class Shopify{
             ]);
 
         $this->parseHeaders($response);
+        $this->parseResponseStatus($response);
         $responseBody = $this->responseBody($response);
 
         if(isset($responseBody['errors']) || $response->getStatusCode() >= 400){
@@ -116,6 +120,32 @@ class Shopify{
         }
 
         return $responseBody;
+    }
+
+    private function parseResponseStatus($response)
+    {
+        $this->setStatusCode($response->getStatusCode());
+        $this->setReasonPhrase($response->getReasonPhrase());
+    }
+
+    private function setStatusCode($code)
+    {
+        $this->responseStatusCode = $code;
+    }
+
+    public function getStatusCode()
+    {
+        return $this->responseStatusCode;
+    }
+
+    private function setReasonPhrase($message)
+    {
+        $this->reasonPhrase = $message;
+    }
+
+    public function getReasonPhrase()
+    {
+        return $this->reasonPhrase;
     }
 
     private function parseHeaders($response)
