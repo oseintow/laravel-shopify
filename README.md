@@ -24,10 +24,10 @@ Setup alias for the Facade
 ```php5
 <?php
 
-    'aliases' => [
-        ...
-        'Shopify' => Oseintow\Shopify\Facades\Shopify::class,
-    ],
+'aliases' => [
+    ...
+    'Shopify' => Oseintow\Shopify\Facades\Shopify::class,
+],
 ```
 
 ##Configuration
