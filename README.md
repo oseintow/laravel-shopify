@@ -45,7 +45,7 @@ To install/integrate a shop you will need to initiate an oauth authentication wi
 They are:
     1. Shop url (eg. example.myshopify.com)
     2. scope (eg. write_products, read_orders, etc)
-    2. redirect url (eg. mydomain.com/process_oauth_result)
+    2. redirect url (eg. http://mydomain.com/process_oauth_result)
 
 This process will enable us to obtain the shops access token
 
@@ -56,14 +56,14 @@ Route::get("install_shop",function()
 {
     $shopUrl = "example.myshopify.com";
     $scope = ["write_products","read_orders"];
-    $redirectUrl = "mydomain.com/process_shopify_data";
+    $redirectUrl = "http://mydomain.com/process_shopify_data";
 
     $shopify = Shopify::setShopUrl($shopUrl);
     return redirect()->to($shopify->getAuthorizeUrl($scope,$redirectUrl));
 });
 ```
 
-Let retrieve access token
+Let's retrieve access token
 
 ```php5
 Route::get("process_oauth_result",function(\Illuminate\Http\Request $request)
@@ -97,7 +97,7 @@ $products = Shopify::setShopUrl($shopUrl)->setAccessToken($accessToken)->get("ad
 To pass query params
 
 ```php5
-$shopify = Shopify::setShopUrl($shopUrl)->setAccessToken($accessToken)
+$shopify = Shopify::setShopUrl($shopUrl)->setAccessToken($accessToken);
 $products = $shopify->get("admin/products.json", ["limit"=>20, "page" => 1]);
 ```
 
