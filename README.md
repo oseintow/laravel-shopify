@@ -75,9 +75,18 @@ Route::get("process_oauth_result",function(\Illuminate\Http\Request $request)
 });
 ```
 
-Let use our access token get products from shopify.
+To access API resouce use
 
-To get products
+```php5
+Shopify::get("resource uri",["query string params"]);
+Shopify::post("resource uri",["post body"]);
+Shopify::put("resource uri",["put body"]);
+Shopify::delete("resource uri");
+```
+
+Let use our access token to get products from shopify.
+**NB:** You can use this to access any resource on shopify (products, orders, etc)
+
 ```php5
 $shopUrl = "example.myshopify.com";
 $accessToken = "xxxxxxxxxxxxxxxxxxxxx";
