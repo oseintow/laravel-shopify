@@ -75,6 +75,22 @@ Route::get("process_oauth_result",function(\Illuminate\Http\Request $request)
 });
 ```
 
+Let use our access token get products from shopify.
+
+To get products
+```php5
+$shopUrl = "example.myshopify.com";
+$accessToken = "xxxxxxxxxxxxxxxxxxxxx";
+$products = Shopify::setShopUrl($shopUrl)->setAccessToken($accessToken)->get("admin/products.json");
+```
+
+To pass query params
+
+```php5
+$shopify = Shopify::setShopUrl($shopUrl)->setAccessToken($accessToken)
+$products = $shopify->get("admin/products.json", ["limit"=>20, "page" => 1]);
+```
+
 
 
 
