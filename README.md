@@ -10,7 +10,7 @@ Add package to composer.json
 
 Add the service provider to config/app.php in the providers array.
 
-    ```php
+    ```php5
     <?php
 
     'providers' => [
@@ -21,7 +21,7 @@ Add the service provider to config/app.php in the providers array.
 
 Setup alias for the Facade
 
-    ```php
+    ```php5
     <?php
 
         'aliases' => [
@@ -49,7 +49,7 @@ They are:
 
 This process will enable us to obtain the shops access token
 
-    ```php
+    ```php5
     use Oseintow\Shopify\Facades\Shopify
 
     Route::get("install_shop",function(){
@@ -64,7 +64,7 @@ This process will enable us to obtain the shops access token
 
 Let retrieve access token
 
-    ```php
+    ```php5
     Route::get("process_oauth_result",function(\Illuminate\Http\Request $request){
         $shopUrl = "example.myshopify.com";
         $accesToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code));
