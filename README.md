@@ -1,10 +1,8 @@
 ## Laravel Shopify
----
 
 Laravel Shopify is a simple package which helps to build robust integration into shopify.
 
 #Installation
----
 
 Add package to composer.json
 
@@ -29,7 +27,6 @@ Setup alias for the Facade
         ],
 
 #Configuration
----
 
 Laravel Shopify requires connection configuration. You will need to publish vendor assets
 
@@ -38,7 +35,6 @@ Laravel Shopify requires connection configuration. You will need to publish vend
 This will create a shopify.php file in the config directory. You will need to set your *API_KKEY* and *SECRET*
 
 #Usage
----
 
 
 
