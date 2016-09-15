@@ -50,7 +50,7 @@ They are:
 This process will enable us to obtain the shops access token
 
 ```php5
-use Oseintow\Shopify\Facades\Shopify
+use Oseintow\Shopify\Facades\Shopify;
 
 Route::get("install_shop",function()
 {
@@ -75,7 +75,7 @@ Route::get("process_oauth_result",function(\Illuminate\Http\Request $request)
 });
 ```
 
-To access API resouce use
+To access API resource use
 
 ```php5
 Shopify::get("resource uri",["query string params"]);
@@ -85,7 +85,8 @@ Shopify::delete("resource uri");
 ```
 
 Let use our access token to get products from shopify.
-**NB:** You can use this to access any resource on shopify (products, orders, etc)
+
+**NB:** You can use this to access any resource on shopify (be it products, orders, etc)
 
 ```php5
 $shopUrl = "example.myshopify.com";
@@ -98,6 +99,32 @@ To pass query params
 ```php5
 $shopify = Shopify::setShopUrl($shopUrl)->setAccessToken($accessToken)
 $products = $shopify->get("admin/products.json", ["limit"=>20, "page" => 1]);
+```
+
+##Controller Example
+
+If you prefer to use dependency injection over facades like me, then you can inject the Facade:
+
+```php5
+use Illuminate\Http\Request;
+use Oseintow\Shopify\Facades\Shopify;
+
+class Foo
+{
+    protected $shopify;
+
+    public function __construct(Shopify $shopify)
+    {
+        $this->shopify = $shopify;
+    }
+
+    public function getProducts(Request $request)
+    {
+        $products = $this->shopify->setShopUrl($shopUrl)
+            ->setAccessToken($accessToken)
+            ->get('admin/products.json');
+    }
+}
 ```
 
 
