@@ -52,7 +52,8 @@ This process will enable us to obtain the shops access token
 ```php5
 use Oseintow\Shopify\Facades\Shopify
 
-Route::get("install_shop",function(){
+Route::get("install_shop",function()
+{
     $shopUrl = "example.myshopify.com";
     $scope = ["write_products","read_orders"];
     $redirectUrl = "mydomain.com/process_shopify_data";
@@ -65,7 +66,8 @@ Route::get("install_shop",function(){
 Let retrieve access token
 
 ```php5
-Route::get("process_oauth_result",function(\Illuminate\Http\Request $request){
+Route::get("process_oauth_result",function(\Illuminate\Http\Request $request)
+{
     $shopUrl = "example.myshopify.com";
     $accesToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code));
 
