@@ -141,6 +141,13 @@ To get specific header
 Shopify::getHeader("Content-Type");
 ```
 
+Check if header exist
+```php5
+if(Shopify::hasHeader("Content-Type")){
+    echo "Yes header exist";
+}
+```
+
 To get response status code or status message
 ```php5
 Shopify::getStatusCode(); // 200

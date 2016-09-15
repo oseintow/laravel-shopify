@@ -95,7 +95,7 @@ class Shopify{
         list($uri, $params) = [ltrim($args[0],"/"), $args[1] ?? []];
         $response = $this->makeRequest($method, $uri, $params, $this->setXShopifyAccessToken());
 
-        return $response;
+        return collect($response);
     }
 
     private function makeRequest($method, $uri, $params = [], $headers = [])
