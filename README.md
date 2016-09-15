@@ -43,6 +43,7 @@ This will create a shopify.php file in the config directory. You will need to se
 To install/integrate a shop you will need to initiate an oauth authentication with the shopify API and this require three components.
 
 They are:
+
     1. Shop url (eg. example.myshopify.com)
     2. scope (eg. write_products, read_orders, etc)
     2. redirect url (eg. http://mydomain.com/process_oauth_result)
