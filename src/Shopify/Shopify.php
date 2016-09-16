@@ -79,7 +79,8 @@ class Shopify{
         return $this;
     }
 
-    public function removeHeaders(){
+    public function removeHeaders()
+    {
         $this->requestHeaders = [];
 
         return $this;
@@ -111,8 +112,7 @@ class Shopify{
                 'http_errors' => false
             ]);
 
-        $this->parseHeaders($response);
-        $this->parseResponseStatus($response);
+        $this->parseResponse($response);
         $responseBody = $this->responseBody($response);
 
         if(isset($responseBody['errors']) || $response->getStatusCode() >= 400){
@@ -125,8 +125,9 @@ class Shopify{
         return (is_array($responseBody) && (count($responseBody) > 0)) ? array_shift($responseBody) : $responseBody;
     }
 
-    private function parseResponseStatus($response)
+    private function parseResponse($response)
     {
+        $this->parseHeaders($response->getHeaders());
         $this->setStatusCode($response->getStatusCode());
         $this->setReasonPhrase($response->getReasonPhrase());
     }
@@ -151,9 +152,9 @@ class Shopify{
         return $this->reasonPhrase;
     }
 
-    private function parseHeaders($response)
+    private function parseHeaders($headers)
     {
-        foreach ($response->getHeaders() as $name => $values) {
+        foreach ($headers as $name => $values) {
             $this->responseHeaders = array_merge($this->responseHeaders, [$name => implode(', ', $values)]);
         }
     }
@@ -165,9 +166,7 @@ class Shopify{
 
     public function getHeader($header)
     {
-        if($this->hasHeader($header))
-            return $this->responseHeaders[$header];
-        return '';
+        return $this->hasHeader($header) ? $this->responseHeaders[$header] : '';
     }
 
     public function hasHeader($header)
