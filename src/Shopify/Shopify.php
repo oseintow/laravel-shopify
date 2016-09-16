@@ -6,8 +6,8 @@ use GuzzleHttp\Client;
 use Oseintow\Shopify\Exceptions\ShopifyApiException;
 
 
-class Shopify{
-
+class Shopify
+{
     protected $key;
     protected $secret;
     protected $shopDomain;
@@ -21,7 +21,7 @@ class Shopify{
     public function __construct(Client $client, $key = '', $secret = '')
     {
         $this->key = $key;
-        $this->secret= $secret;
+        $this->secret = $secret;
         $this->client = $client;
     }
 
@@ -44,7 +44,7 @@ class Shopify{
     // Get the URL required to request authorization
     public function getAuthorizeUrl($scope = [] || '', $redirect_url='')
     {
-        if(is_array($scope)) $scope = implode(",", $scope);
+        if (is_array($scope)) $scope = implode(",", $scope);
         $url = "https://{$this->shopDomain}/admin/oauth/authorize?client_id={$this->key}&scope=" . urlencode($scope);
         if ($redirect_url != '') $url .= "&redirect_uri=" . urlencode($redirect_url);
 
@@ -115,7 +115,7 @@ class Shopify{
         $this->parseResponse($response);
         $responseBody = $this->responseBody($response);
 
-        if(isset($responseBody['errors']) || $response->getStatusCode() >= 400){
+        if (isset($responseBody['errors']) || $response->getStatusCode() >= 400){
             throw new ShopifyApiException(
                 $responseBody['errors'] ?? $response->getReasonPhrase(),
                 $response->getStatusCode()
@@ -182,8 +182,8 @@ class Shopify{
     public function removeProtocol($url)
     {
         $disallowed = ['http://', 'https://','http//','ftp://','ftps://'];
-        foreach($disallowed as $d) {
-            if(strpos($url, $d) === 0) {
+        foreach ($disallowed as $d) {
+            if (strpos($url, $d) === 0) {
                 return str_replace($d, '', $url);
             }
         }

@@ -6,7 +6,8 @@ use Config;
 use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
 
-class ShopifyServiceProvider extends ServiceProvider {
+class ShopifyServiceProvider extends ServiceProvider
+{
     /**
      * Indicates if loading of the provider is deferred.
      *

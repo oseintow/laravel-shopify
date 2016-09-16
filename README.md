@@ -129,8 +129,8 @@ class Foo
             ->setAccessToken($accessToken)
             ->get('admin/products.json');
 
-        $products->each(function($value){
-             \Log::info($value->title);
+        $products->each(function($product){
+             \Log::info($product->title);
         });
     }
 }
