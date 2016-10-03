@@ -109,7 +109,7 @@ If you prefer to use dependency injection over facades like me, then you can inj
 
 ```php5
 use Illuminate\Http\Request;
-use Oseintow\Shopify\Facades\Shopify;
+use Oseintow\Shopify\Shopify;
 
 class Foo
 {
