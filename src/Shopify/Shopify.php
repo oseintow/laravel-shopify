@@ -4,6 +4,7 @@ namespace Oseintow\Shopify;
 
 use GuzzleHttp\Client;
 use Oseintow\Shopify\Exceptions\ShopifyApiException;
+use Config;
 
 
 class Shopify
@@ -18,11 +19,11 @@ class Shopify
     protected $responseStatusCode;
     protected $reasonPhrase;
 
-    public function __construct(Client $client, $key = '', $secret = '')
+    public function __construct(Client $client)
     {
-        $this->key = $key;
-        $this->secret = $secret;
         $this->client = $client;
+        $this->key = Config::get('shopify.key');
+        $this->secret = Config::get('shopify.secret');
     }
 
     /*
