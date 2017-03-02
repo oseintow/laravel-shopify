@@ -105,7 +105,7 @@ $products = $shopify->get("admin/products.json", ["limit"=>20, "page" => 1]);
 
 ##Controller Example
 
-If you prefer to use dependency injection over facades like me, then you can inject the Facade:
+If you prefer to use dependency injection over facades like me, then you can inject the Class:
 
 ```php5
 use Illuminate\Http\Request;
