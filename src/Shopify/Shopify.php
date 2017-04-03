@@ -117,8 +117,12 @@ class Shopify
         $responseBody = $this->responseBody($response);
 
         if (isset($responseBody['errors']) || $response->getStatusCode() >= 400){
+            $errors = is_array($responseBody['errors']) ?
+                json_encode($responseBody['errors']) :
+                $responseBody['errors'];
+
             throw new ShopifyApiException(
-                $responseBody['errors'] ?? $response->getReasonPhrase(),
+                $errors ?? $response->getReasonPhrase(),
                 $response->getStatusCode()
             );
         }
