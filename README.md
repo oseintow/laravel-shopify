@@ -2,7 +2,7 @@
 
 Laravel Shopify is a simple package which helps to build robust integration into shopify.
 
-##Installation
+## Installation
 
 Add package to composer.json
 
@@ -30,7 +30,7 @@ Setup alias for the Facade
 ],
 ```
 
-##Configuration
+## Configuration
 
 Laravel Shopify requires connection configuration. You will need to publish vendor assets
 
@@ -38,7 +38,7 @@ Laravel Shopify requires connection configuration. You will need to publish vend
 
 This will create a shopify.php file in the config directory. You will need to set your **API_KEY** and **SECRET**
 
-##Usage
+## Usage
 
 To install/integrate a shop you will need to initiate an oauth authentication with the shopify API and this require three components.
 
@@ -61,6 +61,20 @@ Route::get("install_shop",function()
 
     $shopify = Shopify::setShopUrl($shopUrl);
     return redirect()->to($shopify->getAuthorizeUrl($scope,$redirectUrl));
+});
+```
+
+Let's retrieve access token
+
+```php5
+Route::get("process_oauth_result",function(\Illuminate\Http\Request $request)
+{
+    $shopUrl = "example.myshopify.com";
+    $accesToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code));
+
+    dd($accessToken);
+    
+    // redirect to success page or billing etc.
 });
 ```
 
@@ -90,34 +104,21 @@ public function verifyWebhook(Request $request)
     $data = $request->getContent();
     $hmacHeader = $request->server('HTTP_X_SHOPIFY_HMAC_SHA256');
 
-    if(Shopify::verifyWebHook($data, $hmacHeader)){
+    if (Shopify::verifyWebHook($data, $hmacHeader)) {
         logger("verification passed");
-    }else{
+    } else {
         logger("verification failed");
     }
 }
 
 ```
 
-
-Let's retrieve access token
-
-```php5
-Route::get("process_oauth_result",function(\Illuminate\Http\Request $request)
-{
-    $shopUrl = "example.myshopify.com";
-    $accesToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code));
-
-    dd($accessToken);
-});
-```
-
 To access API resource use
 
 ```php5
-Shopify::get("resource uri",["query string params"]);
-Shopify::post("resource uri",["post body"]);
-Shopify::put("resource uri",["put body"]);
+Shopify::get("resource uri", ["query string params"]);
+Shopify::post("resource uri", ["post body"]);
+Shopify::put("resource uri", ["put body"]);
 Shopify::delete("resource uri");
 ```
 
@@ -139,7 +140,7 @@ $shopify = Shopify::setShopUrl($shopUrl)->setAccessToken($accessToken);
 $products = $shopify->get("admin/products.json", ["limit"=>20, "page" => 1]);
 ```
 
-##Controller Example
+## Controller Example
 
 If you prefer to use dependency injection over facades like me, then you can inject the Class:
 
@@ -172,7 +173,7 @@ class Foo
 }
 ```
 
-##Miscellaneous
+## Miscellaneous
 
 To get Response headers
 
