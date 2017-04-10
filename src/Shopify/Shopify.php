@@ -5,7 +5,7 @@ namespace Oseintow\Shopify;
 use GuzzleHttp\Client;
 use Oseintow\Shopify\Exceptions\ShopifyApiException;
 use Config;
-
+use Exception;
 
 class Shopify
 {
@@ -135,6 +135,26 @@ class Shopify
         $this->parseHeaders($response->getHeaders());
         $this->setStatusCode($response->getStatusCode());
         $this->setReasonPhrase($response->getReasonPhrase());
+    }
+
+    public function verifyRequest($queryParams)
+    {
+        if (!array_key_exists('hmac', $queryParams)) return false;
+
+        unset($queryParams['hmac'], $queryParams['signature']);
+
+        ksort($queryParams);
+
+        $keys = collect($queryParams)->map(function($value, $key){
+            $key   = strtr($key, ['&' => '%26', '%' => '%25', '=' => '%3D']);
+            $value = strtr($value, ['&' => '%26', '%' => '%25']);
+
+            return $key . '=' . $value;
+        })->implode("&");
+
+        $calculatedHmac = hash_hmac('sha256', $keys, $this->secret);
+
+        return hash_equals($queryParams['hmac'], $calculatedHmac);
     }
 
     private function setStatusCode($code)
