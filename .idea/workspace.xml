@@ -50,8 +50,8 @@
       <file leaf-file-name="Shopify.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Shopify/Shopify.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-260">
-              <caret line="151" column="33" selection-start-line="151" selection-start-column="33" selection-end-line="151" selection-end-column="33" />
+            <state relative-caret-position="382">
+              <caret line="180" column="5" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
               <folding>
                 <element signature="e#36#58#0#PHP" expanded="true" />
               </folding>
@@ -380,12 +380,12 @@
       <workItem from="1486476610316" duration="744000" />
       <workItem from="1490916748857" duration="2839000" />
       <workItem from="1490983019739" duration="2470000" />
-      <workItem from="1491844437451" duration="4520000" />
+      <workItem from="1491844437451" duration="6661000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87136000" />
+    <option name="totallyTimeSpent" value="89277000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="982" extended-state="6" />
@@ -824,8 +824,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Shopify/Shopify.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-260">
-          <caret line="151" column="33" selection-start-line="151" selection-start-column="33" selection-end-line="151" selection-end-column="33" />
+        <state relative-caret-position="382">
+          <caret line="180" column="5" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
           <folding>
             <element signature="e#36#58#0#PHP" expanded="true" />
           </folding>

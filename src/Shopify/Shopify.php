@@ -145,13 +145,12 @@ class Shopify
             $queryParams = explode('&', $queryParams);
             foreach($queryParams as $queryParam)
             {
-                list($key, $val) = explode('=', $queryParam);
-                $data[$key] = $val;
+                list($key, $value) = explode('=', $queryParam);
+                $data[$key] = $value;
             }
 
             $queryParams = $data;
         }
-
 
         $hmac = $queryParams['hmac'] ?? '';
 
@@ -169,6 +168,13 @@ class Shopify
         $calculatedHmac = hash_hmac('sha256', $params, $this->secret);
 
         return hash_equals($hmac, $calculatedHmac);
+    }
+
+    public function verifyWebHook($data, $hmacHeader)
+    {
+        $calculatedHmac = base64_encode(hash_hmac('sha256', $data, $this->secret, true));
+
+        return ($hmacHeader == $calculatedHmac);
     }
 
     private function setStatusCode($code)
