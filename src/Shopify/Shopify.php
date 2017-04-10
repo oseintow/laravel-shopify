@@ -139,22 +139,36 @@ class Shopify
 
     public function verifyRequest($queryParams)
     {
-        if (!array_key_exists('hmac', $queryParams)) return false;
+        if (is_string($queryParams)) {
+            $data = [];
 
-        unset($queryParams['hmac'], $queryParams['signature']);
+            $queryParams = explode('&', $queryParams);
+            foreach($queryParams as $queryParam)
+            {
+                list($key, $val) = explode('=', $queryParam);
+                $data[$key] = $val;
+            }
+
+            $queryParams = $data;
+        }
+
+
+        $hmac = $queryParams['hmac'] ?? '';
+
+        unset($queryParams['signature'], $queryParams['hmac']);
 
         ksort($queryParams);
 
-        $keys = collect($queryParams)->map(function($value, $key){
+        $params = collect($queryParams)->map(function($value, $key){
             $key   = strtr($key, ['&' => '%26', '%' => '%25', '=' => '%3D']);
             $value = strtr($value, ['&' => '%26', '%' => '%25']);
 
             return $key . '=' . $value;
         })->implode("&");
 
-        $calculatedHmac = hash_hmac('sha256', $keys, $this->secret);
+        $calculatedHmac = hash_hmac('sha256', $params, $this->secret);
 
-        return hash_equals($queryParams['hmac'], $calculatedHmac);
+        return hash_equals($hmac, $calculatedHmac);
     }
 
     private function setStatusCode($code)
