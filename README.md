@@ -64,6 +64,42 @@ Route::get("install_shop",function()
 });
 ```
 
+To verify request(hmac)
+
+```php5
+
+public function verifyRequest(Request $request)
+{
+    $queryString = $request->getQueryString();
+
+    if(Shopify::verifyRequest($queryString)){
+        logger("verification passed");
+    }else{
+        logger("verification failed");
+    }
+}
+
+```
+
+To verify webhook(hmac)
+
+```php5
+
+public function verifyWebhook(Request $request)
+{
+    $data = $request->getContent();
+    $hmacHeader = $request->server('HTTP_X_SHOPIFY_HMAC_SHA256');
+
+    if(Shopify::verifyWebHook($data, $hmacHeader)){
+        logger("verification passed");
+    }else{
+        logger("verification failed");
+    }
+}
+
+```
+
+
 Let's retrieve access token
 
 ```php5
