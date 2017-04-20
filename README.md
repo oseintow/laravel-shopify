@@ -1,6 +1,6 @@
 # Laravel Shopify
 
-Laravel Shopify is a simple package which helps to build robust integration into shopify.
+Laravel Shopify is a simple package which helps to build robust integration into Shopify.
 
 ## Installation
 
@@ -44,9 +44,9 @@ To install/integrate a shop you will need to initiate an oauth authentication wi
 
 They are:
 
-    1. Shop url (eg. example.myshopify.com)
-    2. scope (eg. write_products, read_orders, etc)
-    2. redirect url (eg. http://mydomain.com/process_oauth_result)
+    1. Shop URL (eg. example.myshopify.com)
+    2. Scope (eg. write_products, read_orders, etc)
+    3. Redirect URL (eg. http://mydomain.com/process_oauth_result)
 
 This process will enable us to obtain the shops access token
 
@@ -70,7 +70,7 @@ Let's retrieve access token
 Route::get("process_oauth_result",function(\Illuminate\Http\Request $request)
 {
     $shopUrl = "example.myshopify.com";
-    $accesToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code));
+    $accessToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code));
 
     dd($accessToken);
     
