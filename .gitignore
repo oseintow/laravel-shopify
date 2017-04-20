@@ -7,5 +7,4 @@ Homestead.json
 /.idea
 .idea/*
 /.phpcomplete_extended
-
 tests/_output/*
