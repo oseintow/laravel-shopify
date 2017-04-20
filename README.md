@@ -70,7 +70,7 @@ Let's retrieve access token
 Route::get("process_oauth_result",function(\Illuminate\Http\Request $request)
 {
     $shopUrl = "example.myshopify.com";
-    $accesToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code));
+    $accessToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code));
 
     dd($accessToken);
     
