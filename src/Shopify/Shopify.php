@@ -67,6 +67,20 @@ class Shopify
 
         return $this;
     }
+    
+    public function setKey($key)
+    {
+        $this->key = $key;
+
+        return $this;
+    }
+    
+    public function setSecret($secret)
+    {
+        $this->secret = $secret;
+
+        return $this;
+    }
 
     private function setXShopifyAccessToken()
     {
