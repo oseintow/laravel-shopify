@@ -123,8 +123,17 @@ class Shopify
         $response = $this->client->request(strtoupper($method), $this->baseUrl().$uri, [
                 'headers' => array_merge($headers, $this->requestHeaders),
                 $query => $params,
-                'timeout' => 60.0,
-                'http_errors' => false
+//                'timeout' => 60.0,
+                'http_errors' => false,
+                "verify"          => false,
+                "curl"        => [
+                    CURLOPT_TIMEOUT => 60,
+                    CURLOPT_TIMEOUT_MS => 0,
+                    CURLOPT_CONNECTTIMEOUT => 60,
+                    CURLOPT_RETURNTRANSFER =>true,
+                    CURLOPT_FOLLOWLOCATION=> true,
+                    CURLOPT_MAXREDIRS=> 3
+                ]
             ]);
 
         $this->parseResponse($response);
