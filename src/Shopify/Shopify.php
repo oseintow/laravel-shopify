@@ -161,7 +161,7 @@ class Shopify
             foreach($queryParams as $queryParam)
             {
                 list($key, $value) = explode('=', $queryParam);
-                $data[$key] = $value;
+                $data[$key] = urldecode($value);
             }
 
             $queryParams = $data;
