@@ -35,7 +35,7 @@ class ShopifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app['shopify'] = $this->app->singleton(Shopify::class, function($app)
+        $this->app->singleton('shopify',function($app) 
         {
             return new Shopify(new Client);
         });
