@@ -45,9 +45,12 @@ class Shopify
     public function getAuthorizeUrl($scope = [] || '', $redirect_url='',$nonce='')
     {
         if (is_array($scope)) $scope = implode(",", $scope);
+
         $url = "https://{$this->shopDomain}/admin/oauth/authorize?client_id={$this->key}&scope=" . urlencode($scope);
+        
         if ($redirect_url != '') $url .= "&redirect_uri=" . urlencode($redirect_url);
-        if($nonce!='') $url .= "&state=" . urlencode($nonce);
+
+        if ($nonce!='') $url .= "&state=" . urlencode($nonce);
         
         return $url;
     }
