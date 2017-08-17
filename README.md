@@ -70,7 +70,7 @@ Let's retrieve access token
 Route::get("process_oauth_result",function(\Illuminate\Http\Request $request)
 {
     $shopUrl = "example.myshopify.com";
-    $accessToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code));
+    $accessToken = Shopify::setShopUrl($shopUrl)->getAccessToken($request->code);
 
     dd($accessToken);
     
@@ -81,7 +81,6 @@ Route::get("process_oauth_result",function(\Illuminate\Http\Request $request)
 To verify request(hmac)
 
 ```php5
-
 public function verifyRequest(Request $request)
 {
     $queryString = $request->getQueryString();
