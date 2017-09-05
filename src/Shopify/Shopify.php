@@ -53,7 +53,7 @@ class Shopify
 
     public function getAccessToken($code)
     {
-        $uri = "https://{$this->shopDomain}/admin/oauth/access_token";
+        $uri = "admin/oauth/access_token";
         $payload = ["client_id" => $this->key, 'client_secret' => $this->secret, 'code' => $code];
         $response = $this->makeRequest('POST', $uri, $payload);
 
