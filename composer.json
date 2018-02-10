@@ -18,6 +18,16 @@
             "Oseintow\\": "src/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Oseintow\\Shopify\\ShopifyServiceProvider"
+            ],
+            "aliases": {
+                "Shopify": "Oseintow\\Shopify\\Facades\\Shopify"
+            }
+        }
+    },
     "config": {
         "preferred-install": "dist"
     }
