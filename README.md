@@ -3,6 +3,12 @@
 Laravel Shopify is a simple package which helps to build robust integration into Shopify.
 
 ## Installation
+### Laravel 5.5+
+
+Package auto discovery will take care of setting up the alias and facade for you
+
+
+### Laravel 5.4 <
 
 Add package to composer.json
 
@@ -18,6 +24,7 @@ Add the service provider to config/app.php in the providers array.
     Oseintow\Shopify\ShopifyServiceProvider::class,
 ],
 ```
+
 
 Setup alias for the Facade
 
