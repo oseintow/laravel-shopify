@@ -123,6 +123,11 @@ class Shopify
     private function makeRequest($method, $uri, $params = [], $headers = [])
     {
         $query = in_array($method, ['get','delete']) ? "query" : "json";
+
+        $rateLimit = explode("/", $this->getHeader("X-Shopify-Shop-Api-Call-Limit"));
+
+        if($rateLimit[0] >= 38 ) sleep(15);
+
         $response = $this->client->request(strtoupper($method), $this->baseUrl().$uri, [
                 'headers' => array_merge($headers, $this->requestHeaders),
                 $query => $params,
