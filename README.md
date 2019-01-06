@@ -57,7 +57,7 @@ Route::get("install_shop",function()
 {
     $shopUrl = "example.myshopify.com";
     $scope = ["write_products","read_orders"];
-    $redirectUrl = "http://mydomain.com/process_shopify_data";
+    $redirectUrl = "http://mydomain.com/process_oauth_result";
 
     $shopify = Shopify::setShopUrl($shopUrl);
     return redirect()->to($shopify->getAuthorizeUrl($scope,$redirectUrl));
