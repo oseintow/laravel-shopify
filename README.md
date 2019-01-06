@@ -8,6 +8,13 @@ Add package to composer.json
 
     composer require oseintow/laravel-shopify
 
+### Laravel 5.5+
+
+Package auto discovery will take care of setting up the alias and facade for you
+
+
+### Laravel 5.4 <
+
 Add the service provider to config/app.php in the providers array.
 
 ```php5
@@ -18,6 +25,7 @@ Add the service provider to config/app.php in the providers array.
     Oseintow\Shopify\ShopifyServiceProvider::class,
 ],
 ```
+
 
 Setup alias for the Facade
 
