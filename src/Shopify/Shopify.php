@@ -4,6 +4,7 @@ namespace Oseintow\Shopify;
 
 use GuzzleHttp\Client;
 use Oseintow\Shopify\Exceptions\ShopifyApiException;
+use Oseintow\Shopify\Exceptions\ShopifyApiResourceNotFoundException;
 
 class Shopify
 {
