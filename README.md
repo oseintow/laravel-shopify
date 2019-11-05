@@ -6,7 +6,7 @@ Laravel Shopify is a simple package which helps to build robust integration into
 
 Add package to composer.json
 
-    composer require oseintow/laravel-shopify
+    composer require kudobuzz/laravel-shopify
 
 ### Laravel 5.5+
 
@@ -22,7 +22,7 @@ Add the service provider to config/app.php in the providers array.
 
 'providers' => [
     ...
-    Oseintow\Shopify\ShopifyServiceProvider::class,
+    Kudobuzz\Shopify\ShopifyServiceProvider::class,
 ],
 ```
 
@@ -34,7 +34,7 @@ Setup alias for the Facade
 
 'aliases' => [
     ...
-    'Shopify' => Oseintow\Shopify\Facades\Shopify::class,
+    'Shopify' => Kudobuzz\Shopify\Facades\Shopify::class,
 ],
 ```
 
@@ -59,7 +59,7 @@ They are:
 This process will enable us to obtain the shops access token
 
 ```php5
-use Oseintow\Shopify\Facades\Shopify;
+use Kudobuzz\Shopify\Facades\Shopify;
 
 Route::get("install_shop",function()
 {
@@ -153,7 +153,7 @@ If you prefer to use dependency injection over facades like me, then you can inj
 
 ```php5
 use Illuminate\Http\Request;
-use Oseintow\Shopify\Shopify;
+use Kudobuzz\Shopify\Shopify;
 
 class Foo
 {

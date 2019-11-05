@@ -1,11 +1,10 @@
 {
-    "name": "oseintow/laravel-shopify",
-    "description": "Laravel shopify package",
+    "name": "kudobuzz/laravel-shopify",
+    "description": "Laravel shopify package for kudobuzz users",
     "license": "MIT",
     "authors": [
         {
-            "name": "michael osei ntow",
-            "email": "oseintow@gmail.com"
+            "name": "kudobuzz"
         }
     ],
     "require": {
@@ -15,16 +14,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Oseintow\\": "src/"
+            "Kudobuzz\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Oseintow\\Shopify\\ShopifyServiceProvider"
+                "Kudobuzz\\Shopify\\ShopifyServiceProvider"
             ],
             "aliases": {
-                "Shopify": "Oseintow\\Shopify\\Facades\\Shopify"
+                "Shopify": "Kudobuzz\\Shopify\\Facades\\Shopify"
             }
         }
     },
