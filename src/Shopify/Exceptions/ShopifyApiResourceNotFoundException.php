@@ -1,12 +1,12 @@
 <?php
 /**
- * Created by oseintow.
- * User: oseintow
+ * Created by kudobuzz.
+ * User: kudobuzz
  * Date: 9/14/16
  * Time: 7:28 PM
  */
 
-namespace Oseintow\Shopify\Exceptions;
+namespace Kudobuzz\Shopify\Exceptions;
 
 use Exception;
 

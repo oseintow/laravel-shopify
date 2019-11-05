@@ -1,10 +1,10 @@
 <?php
 
-namespace Oseintow\Shopify;
+namespace Kudobuzz\Shopify;
 
 use GuzzleHttp\Client;
-use Oseintow\Shopify\Exceptions\ShopifyApiException;
-use Oseintow\Shopify\Exceptions\ShopifyApiResourceNotFoundException;
+use Kudobuzz\Shopify\Exceptions\ShopifyApiException;
+use Kudobuzz\Shopify\Exceptions\ShopifyApiResourceNotFoundException;
 
 class Shopify
 {
